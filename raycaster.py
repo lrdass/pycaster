@@ -95,7 +95,12 @@ while True:
             for point in points:
                 pygame.draw.circle(top_view_surface, (255, 255, 0),
                                    (int(point.x), int(point.y)), 3, 3)
-        
+                
+                size = math.sqrt((player.x - point.x)**2 + (player.y - player.y)**2)
+                pygame.draw.line(first_person, (255,255,255),
+                                (360/(2+i), 360/((2-size)/2)), (360/(2+i), 360/((2+size)/2))
+                                )
+
     for wall in walls:
         pygame.draw.line(top_view_surface, (255, 255, 0), (300, 100), (300, 300))
      
