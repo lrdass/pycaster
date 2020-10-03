@@ -98,10 +98,11 @@ while True:
                 pygame.draw.circle(top_view_surface, (255, 255, 0),
                                    (int(point.x), int(point.y)), 3, 3)
                 
-                size = math.sqrt((player.x - point.x)**2 + (player.y - point.y)**2) * math.cos(angle-angle_player)
+                distance = math.sqrt((player.x - point.x)**2 + (player.y - point.y)**2)  * math.cos(angle-angle_player)
+                height = 360/ distance
                 pygame.draw.rect(
                     first_person, (255,255,255),
-                    pygame.Rect(i, 360/2-size/2, 1, size) 
+                    pygame.Rect(i, 360/2 - height/2, 1, height) 
                 )
 
     for wall in walls:
