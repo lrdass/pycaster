@@ -12,7 +12,7 @@ screen = pygame.display.set_mode(WINDOW)
 
 walls = [
     # pygame.Rect(300, 100, 300, 300),
-    # pygame.Rect(150, 90, 100, 40),
+    [[100,100], [300,100]],
     [[300, 100], [300, 300]]
 ]
 
@@ -91,15 +91,18 @@ while True:
 
         pygame.draw.line(top_view_surface, (255, 255, 0), player, ray_distance)
         points = cast_ray(walls)
+
+        pygame.draw.line(first_person, (255,0,0), (0,0),(360,0))
         if points:
             for point in points:
                 pygame.draw.circle(top_view_surface, (255, 255, 0),
                                    (int(point.x), int(point.y)), 3, 3)
                 
-                size = math.sqrt((player.x - point.x)**2 + (player.y - player.y)**2)
-                pygame.draw.line(first_person, (255,255,255),
-                                (360/(2+i), 360/((2-size)/2)), (360/(2+i), 360/((2+size)/2))
-                                )
+                size = math.sqrt((player.x - point.x)**2 + (player.y - point.y)**2) * math.cos(angle-angle_player)
+                pygame.draw.rect(
+                    first_person, (255,255,255),
+                    pygame.Rect(i, 360/2-size/2, 1, size) 
+                )
 
     for wall in walls:
         pygame.draw.line(top_view_surface, (255, 255, 0), (300, 100), (300, 300))
